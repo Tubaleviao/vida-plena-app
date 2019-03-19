@@ -1,7 +1,7 @@
 import React from 'react'
-import {Button, View, StyleSheet, Text, TextInput} from 'react-native'
+import {Button, View, StyleSheet, Text, TextInput, Form} from 'react-native'
 
-class SignInGoogleBase extends Component {
+class SignInGoogleBase extends React.Component {
   constructor(props) {
     super(props);
 
@@ -26,11 +26,13 @@ class SignInGoogleBase extends Component {
     const { error } = this.state;
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Google</button>
+      <Form onSubmit={this.onSubmit}>
+        <Button type="submit">Sign In with Google</Button>
 
-        {error && <p>{error.message}</p>}
-      </form>
+        <Text>{error && <p>{error.message}</p>}</Text>
+      </Form>
     );
   }
 }
+
+export default SignInGoogleBase

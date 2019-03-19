@@ -1,6 +1,8 @@
 import React from 'react'
 import {Button, View, StyleSheet, Text, TextInput} from 'react-native'
-import {SignInGoogle} from '../components/SignIn.js'
+//import SignInGoogleBase from '../components/SignIn.js'
+
+//<SignInGoogleBase />
 
 class LoginScreen extends React.Component {
 
@@ -26,7 +28,7 @@ class LoginScreen extends React.Component {
         <Button title="Login"
           onPress={()=>this.props.navigation.navigate('About', this.state)}
         />
-        <SignInGoogle />
+        
       </View>
     );
   }
