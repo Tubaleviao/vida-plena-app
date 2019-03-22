@@ -1,6 +1,7 @@
 import React from 'react'
 import {Button, View, StyleSheet, Text, TextInput} from 'react-native'
-//import SignInGoogleBase from '../components/SignIn.js'
+import SignInGoogleBase from '../components/SignIn.js'
+import Firebase from '../components/FirebaseData.js'
 
 //<SignInGoogleBase />
 
@@ -28,7 +29,7 @@ class LoginScreen extends React.Component {
         <Button title="Login"
           onPress={()=>this.props.navigation.navigate('About', this.state)}
         />
-        
+        <SignInGoogleBase firebase={Firebase}/>
       </View>
     );
   }

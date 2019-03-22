@@ -55,6 +55,6 @@ const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
   render() {
-    return <AppContainer persistenceKey={"ffdssadasddff"}/>;
+    return <AppContainer persistenceKey={"ff4ddff"}/>;
   }
 }

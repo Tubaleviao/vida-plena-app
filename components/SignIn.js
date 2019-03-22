@@ -8,31 +8,31 @@ class SignInGoogleBase extends React.Component {
     this.state = { error: null };
   }
 
-  onSubmit = event => {
+  onSubmit = () => {
     this.props.firebase
-      .doSignInWithGoogle()
+      .signInGoogle()
       .then(socialAuthUser => {
         this.setState({ error: null });
-        this.props.history.push(ROUTES.HOME);
+        //this.props.history.push(ROUTES.HOME);
       })
       .catch(error => {
         this.setState({ error });
       });
-
-    event.preventDefault();
   };
 
   render() {
     const { error } = this.state;
 
     return (
-      <Form onSubmit={this.onSubmit}>
-        <Button type="submit">Sign In with Google</Button>
+      <View>
+        <Button type="submit" onPress={this.onSubmit} title="Sign In with Google" />
 
-        <Text>{error && <p>{error.message}</p>}</Text>
-      </Form>
+        <Text>Testing</Text>
+      </View>
     );
   }
 }
 
 export default SignInGoogleBase
+
+/// {error && <p>{error.message}</p>}

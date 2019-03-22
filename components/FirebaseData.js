@@ -1,5 +1,6 @@
+import App from 'firebase/app'
 import Firebase from 'firebase'
-import 'firebase/auth'
+import auth from 'firebase/auth'
 import config from '../config.key'
 
 const firebaseImpl = Firebase.initializeApp(config);
@@ -7,9 +8,9 @@ const firebaseDatabase = Firebase.database();
 
 class Firebase {
   constructor() {
-    app.initializeApp(config);
-    this.auth = app.auth();
-    this.googleProvider = new app.auth.GoogleAuthProvider();
+    App.initializeApp(config);
+    this.auth = App.auth();
+    this.googleProvider = new App.auth.GoogleAuthProvider();
   }
   // *** Auth API ***
 
