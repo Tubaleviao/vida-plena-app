@@ -1,13 +1,5 @@
 import * as firebase from 'firebase'
-
-const config = {
-  apiKey: 'AIzaSyDuuAuO-Hx6f6sVzDXxzF_JpwHU6p-PtjM',
-  authDomain: 'super-jornada-polozi.firebaseapp.com',
-  databaseURL: 'https://super-jornada-polozi.firebaseio.com',
-  projectId: 'super-jornada-polozi',
-  storageBucket: 'gs://super-jornada-polozi.appspot.com',
-  messagingSenderId: '645982420280'
-}
+import config from '../config.key'
 
 const firebaseImpl = firebase.initializeApp(config);
 
