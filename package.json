@@ -9,6 +9,7 @@
   "dependencies": {
     "@expo/videoplayer": "^0.4.0",
     "expo": "^32.0.6",
+    "expo-facebook": "^4.0.0",
     "firebase": "^5.8.4",
     "react": "16.5.0",
     "react-icons": "^3.4.0",

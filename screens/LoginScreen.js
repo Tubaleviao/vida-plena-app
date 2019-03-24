@@ -1,9 +1,7 @@
 import React from 'react'
 import {Button, View, StyleSheet, Text, TextInput} from 'react-native'
-import SignInGoogleBase from '../components/SignIn.js'
-import Firebase from '../components/FirebaseData.js'
-
-//<SignInGoogleBase />
+import SignIn from '../components/SignIn.js'
+import {loginWithFacebook, signInWithGoogleAsync, signInWithEmailAndPassword, authenticated} from '../components/FirebaseData.js'
 
 class LoginScreen extends React.Component {
 
@@ -15,6 +13,15 @@ class LoginScreen extends React.Component {
   setUser = username =>{
     this.setState({username})
   }
+  setPass = password =>{
+    this.setState({password})
+  }
+
+  componentWillMount() {
+    authenticated ? this.props.navigation.navigate('About', this.state) : false;
+  }
+
+  //<Button title="Login with username and password" onPress={()=>this.props.navigation.navigate('About', this.state)} />
 
   render() {
     return (
@@ -26,10 +33,15 @@ class LoginScreen extends React.Component {
           onChangeText={this.setUser}
           autoCapitalize="none"
         />
-        <Button title="Login"
-          onPress={()=>this.props.navigation.navigate('About', this.state)}
+        <TextInput
+          placeholder="password"
+          value={this.state.password}
+          onChangeText={this.setPass}
+          autoCapitalize="none"
         />
-        <SignInGoogleBase firebase={Firebase}/>
+        <SignIn loginWithFacebook={loginWithFacebook} provider='Facebook'/>
+        <SignIn signInWithGoogleAsync={signInWithGoogleAsync} provider='Google'/>
+        <SignIn signInWithEmailAndPassword={signInWithEmailAndPassword} provider='Username and Password' state={this.state}/>
       </View>
     );
   }

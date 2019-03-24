@@ -1,5 +1,6 @@
 import React from 'react';
-import { createStackNavigator, createAppContainer, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator, createAppContainer, createBottomTabNavigator, 
+	createSwitchNavigator,  } from 'react-navigation';
 import LoginScreen from './screens/LoginScreen'
 import AboutScreen from './screens/AboutScreen'
 import PerfilScreen from './screens/PerfilScreen'
@@ -55,6 +56,6 @@ const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
   render() {
-    return <AppContainer persistenceKey={"ff4ddff"}/>;
+    return <AppContainer persistenceKey={"44440hakunauou"}/>;
   }
 }
