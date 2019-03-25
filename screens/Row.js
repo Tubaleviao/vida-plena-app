@@ -18,12 +18,12 @@ const changeScreen = screen => {
 const Row = props => (
   <Card style={styles.card}>
     <Card.Content>
-      <Title>{props.data}</Title>
+      <Title>{props.name}</Title>
       <Caption>Omega Ruby</Caption>
       <Video
         onFullscreenUpdate={screen => changeScreen(screen)}
         ref={r=>this.vid=r}
-        source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/super-jornada-polozi.appspot.com/o/media%2Fe145f617-ee95-4933-b85e-eaf8973d149c?alt=media' }}
+        source={{ uri: props.mediaUrl }}
         rate={1.0}
         volume={1.0}
         muted={false}

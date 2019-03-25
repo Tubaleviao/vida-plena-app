@@ -10,8 +10,8 @@ import HeaderButton from './components/HeaderButton'
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
 const Inicio = createStackNavigator(
-	{Login: AboutScreen, About: AboutScreen,},
-	{initialRouteName: "Login",
+	{Home: AboutScreen, About: AboutScreen,},
+	{initialRouteName: "Home",
 	  	defaultNavigationOptions: {
 	  		headerRight: HeaderButton,
 	     	headerTintColor: '#aabbcc',
@@ -52,10 +52,10 @@ const AppNavigator = createSwitchNavigator({
   Main: TabNavigator,
 })
 
-const AppContainer = createAppContainer(AppNavigator);
+const AppContainer = createAppContainer(AppNavigator); // persistenceKey={"shfcoxxxnanoermilhdsaaauddmao"}
 
 export default class App extends React.Component {
   render() {
-    return <AppContainer persistenceKey={"44440hakunauou"}/>;
+    return <AppContainer />;
   }
 }

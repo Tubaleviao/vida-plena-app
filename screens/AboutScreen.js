@@ -1,18 +1,8 @@
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import {authenticated} from '../components/FirebaseData.js'
-import {StackActions, NavigationActions} from 'react-navigation';
-
-const resetAction = StackActions.reset({
-  index: null,
-  actions: [NavigationActions.navigate({ routeName: 'Login' })],
-});
+import Firebase from '../components/FirebaseData.js'
 
 class AboutScreen extends React.Component {
-
-  componentWillMount() {
-    authenticated ? this.props.navigation.navigate('About', this.state) : this.props.navigation.dispatch(resetAction);
-  }
 
   static navigationOptions = ({ navigation }) => {
     const {params} = navigation.state
@@ -21,10 +11,23 @@ class AboutScreen extends React.Component {
     }
   }
 
+  mostrar = () => {
+    this.props.navigation.goBack();
+  }
+
+
   render() {
+    const {params} = this.props.navigation.state // this.props.navigation.goBack()
+    //console.log('data: '+ JSON.stringify(this.props.navigation.state))
+    //console.log('state: '+JSON.stringify(this.props.navigation.state))
+
+    
+    ////firebase.isAuthenticated() ? true : this.props.navigation.navigate('Login', this.state)
+    // 
     return (
       <View style={styles.container}>
         <Text>About Screen</Text>
+        <Button type="submit" onPress={this.mostrar} title={'Sign Out'} /> 
       </View>
     );
   }

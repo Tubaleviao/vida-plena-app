@@ -14,8 +14,10 @@ class SignIn extends React.Component {
     switch(this.props.provider){
       case 'Facebook':
         this.props.loginWithFacebook();
+        break;
       case 'Google':
-        this.props.signInWithGoogleAsync() ? this.props.navigation.navigate('About', this.state) : false;
+        this.props.signInWithGoogleAsync();// ? this.props.navigation.navigate('About', this.state) : false;
+        break;
       case 'Username and Password':
         console.log(this.props.state.username, this.props.state.password);
         this.props.signInWithEmailAndPassword(this.props.state.username, this.props.state.password);

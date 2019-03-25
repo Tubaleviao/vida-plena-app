@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button, View, StyleSheet, Text} from 'react-native'
-import {signOut} from '../components/FirebaseData.js'
+import Firebase from '../components/FirebaseData.js'
 import {StackActions, NavigationActions} from 'react-navigation';
 
 const resetAction = StackActions.reset({
@@ -18,7 +18,7 @@ class DashboardScreen extends React.Component {
           onPress={()=>this.props.navigation.navigate('Settings')}
         />
         <Button title="Logout" 
-          onPress={()=>{signOut(); this.props.navigation.dispatch(resetAction);}}
+          onPress={()=>{Firebase.signOut(); this.props.navigation.dispatch(resetAction);}}
         />
       </View>
     );

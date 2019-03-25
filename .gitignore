@@ -5,3 +5,7 @@ npm-debug.*
 *.p12
 *.key
 *.mobileprovision
+assets/*.key
+components/*.key
+screens/*.key
+config.js
