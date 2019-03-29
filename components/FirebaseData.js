@@ -12,10 +12,10 @@ class Firebase {
       if (user != null) {
         console.log("We are authenticated now! ");
         //let adaRef = app.database().ref("coach_0/contents");
-        change(true);
+        change(true)
         //console.log('data2: '+adaRef)
       }else{
-        change(false);
+        change(false)
       }
     });
   }
@@ -34,7 +34,7 @@ class Firebase {
       const credential = firebase.auth.FacebookAuthProvider.credential(token)
       //const credential = this.auth.FacebookAuthProvider.credential(token); // getCredential
       console.log('credential: '+JSON.stringify(credential))
-      firebase.auth().signInWithCredential(credential).catch((error) => { //  <<< signInWithCredential signInWithCredentialAsync signInAndRetrieveDataWithCredential
+      firebase.auth().signInAndRetrieveDataWithCredential(credential).catch((error) => { //  <<< signInWithCredential signInWithCredentialAsync signInAndRetrieveDataWithCredential
         console.log(error);
       });
       console.log('eita')

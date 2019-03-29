@@ -12,8 +12,7 @@ class LoginScreen extends React.Component {
   }
 
   change = authenticated =>{
-    this.setState({authenticated})
-    //this.setState({data});
+    this.mounted ? this.setState({authenticated}) : true
   }
 
   setUser = username =>{
@@ -24,13 +23,26 @@ class LoginScreen extends React.Component {
   }
 
   componentWillMount() {
-    this.state.firebase = new Firebase(this.change);
     console.log('componentWillMount')
   }
 
+  componentDidMount(){
+    this.mounted = true
+    console.log('componentDidMount '+this.state.firebase) // quando vier por parametro, usar ele
+    this.props.navigation.state.params ? console.log(this.props.navigation.state.params.firebase) : true
+
+    !this.state.firebase ? this.setState({firebase: new Firebase(this.change)}) : true
+    //this.setState({firebase: new Firebase(this.change)})
+    //this.state.firebase = new Firebase(this.change);
+    console.log('componentDidMount')
+  }
+
+  componentWillUnmount() {
+    this.mounted = false
+  }
+
   componentDidUpdate(prevProps) {
-    //console.log('componentDidUpdate') //
-    this.state.firebase.signOut();
+    console.log(this.state.authenticated)
     this.state.authenticated ? this.props.navigation.navigate('About', this.state) : true
   }
 
@@ -53,9 +65,12 @@ class LoginScreen extends React.Component {
           autoCapitalize="none"
           secureTextEntry={true}
         />
-        <SignIn loginWithFacebook={this.state.firebase.loginWithFB} provider='Facebook'/>
+        <SignIn loginWithFacebook={this.state.firebase ? this.state.firebase.loginWithFB : true} 
+          provider='Facebook'/>
         
-        <SignIn signInWithEmailAndPassword={this.state.firebase.loginWithEP} provider='Username and Password' state={this.state} />
+        <SignIn signInWithEmailAndPassword={this.state.firebase? this.state.firebase.loginWithEP : true} 
+          provider='Username and Password' 
+          state={this.state} />
       </View>
     );
   }
