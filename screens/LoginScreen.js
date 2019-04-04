@@ -5,14 +5,19 @@ import Firebase from '../components/FirebaseData.js'
 
 class LoginScreen extends React.Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   state = {
     username: '',
     password: '',
-    authenticated: false
+    authenticated: false,
   }
 
-  change = authenticated =>{
+  change = (authenticated,user) =>{
     this.mounted ? this.setState({authenticated}) : true
+    console.log('state changed: '+authenticated+' '+this.mounted)
   }
 
   setUser = username =>{
@@ -29,9 +34,14 @@ class LoginScreen extends React.Component {
   componentDidMount(){
     this.mounted = true
     console.log('componentDidMount '+this.state.firebase) // quando vier por parametro, usar ele
-    this.props.navigation.state.params ? console.log(this.props.navigation.state.params.firebase) : true
+    const {params} = this.props.navigation.state
+    if(params&&params.firebase){
+      this.setState({firebase: params.firebase})
+    }else if (!this.state.firebase){
+      this.setState({firebase: new Firebase(this.change)})
+    }
 
-    !this.state.firebase ? this.setState({firebase: new Firebase(this.change)}) : true
+    //!this.state.firebase ? this.setState({firebase: new Firebase(this.change)}) : true
     //this.setState({firebase: new Firebase(this.change)})
     //this.state.firebase = new Firebase(this.change);
     console.log('componentDidMount')
@@ -71,6 +81,10 @@ class LoginScreen extends React.Component {
         <SignIn signInWithEmailAndPassword={this.state.firebase? this.state.firebase.loginWithEP : true} 
           provider='Username and Password' 
           state={this.state} />
+
+          <SignIn signInWithGoogleAsync={this.state.firebase? this.state.firebase.loginWithGG : true} 
+            provider='Google'
+            state={this.state}/>
       </View>
     );
   }

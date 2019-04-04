@@ -2,12 +2,18 @@ import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 //import Firebase from '../components/FirebaseData.js'
 
+import { StackActions} from 'react-navigation'
+
 class AboutScreen extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
 
   static navigationOptions = ({ navigation }) => {
     const {params} = navigation.state
     return {
-      headerTitle: 'teste',
+      headerTitle: (params ? 'Olá '+params.firebase.user.displayName.split(' ')[0] : 'teste'),
     }
   }
 
@@ -20,12 +26,17 @@ class AboutScreen extends React.Component {
   }
 
   signOut = () => {
-    const {firebase} = this.props.navigation.state.params
-    if(firebase){
-      firebase.signOut();
-      this.props.navigation.navigate('Login', this.props.navigation.state.params)
+    const {params} = this.props.navigation.state
+    if(params&&params.firebase){
+      params.firebase.signOut();
+      //this.props.navigation.navigate('Login', params)
+      //this.props.navigation.popToTop()
+      this.props.navigation.goBack()
+      //this.props.navigation.dismiss()
     }else{
-      console.log('nop: '+JSON.stringify(this.props.navigation.state.params.firebase))
+      console.log('nop: ')
+      this.props.navigation.goBack()
+      //this.props.navigation.navigate('Login', params)
     }
   }
 

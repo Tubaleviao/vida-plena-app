@@ -21,6 +21,7 @@ class SignIn extends React.Component {
       case 'Username and Password':
         console.log(this.props.state.username, this.props.state.password);
         this.props.signInWithEmailAndPassword(this.props.state.username, this.props.state.password);
+        break;
       default:
         console.log('No default '+this.props.provider);
     }

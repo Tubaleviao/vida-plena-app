@@ -34,8 +34,16 @@ const data2 = [
 
 class ExplorarScreen extends React.Component {
 
+  componentDidMount () {
+      
+  }
+
   static navigationOptions = ({ navigation }) => {
-    return {headerTitle: 'Explorar'}
+    const {params} = navigation.state
+    //console.log(navigation.state)
+    return {
+      headerTitle: (params ? 'Olá '+params.firebase.user.displayName.split(' ')[0] : 'teste'),
+    }
   }
 
   state = {
