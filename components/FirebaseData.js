@@ -1,8 +1,16 @@
 import * as firebase from 'firebase'
 import config from '../config.js'
+import { AsyncStorage } from "react-native"
 
 class Firebase {
   constructor(change){
+    let _storeData = async (contents) => {
+      try {
+        await AsyncStorage.setItem('contents', JSON.stringify(contents));
+      } catch (error) {
+        console.log(error)
+      }
+    }
     const app = firebase.initializeApp(config);
     this.auth = app.auth()
     this.authenticated = false;
@@ -13,13 +21,24 @@ class Firebase {
       console.log("user: "+JSON.stringify(user));
       if (user != null) {
         console.log("We are authenticated now! ");
-        //let adaRef = app.database().ref("coach_0/contents");
+        let adaRef = app.database().ref("coach_0/contents");
+        //this._storeData(adaRef)
+        adaRef.once("value").then(function(snapshot) {
+          _storeData(snapshot.val())
+        })
         change(true, user)
-        //console.log('data2: '+adaRef)
       }else{
         change(false, user)
       }
     });
+  }
+
+  _storeData = async (contents) => {
+    try {
+      await AsyncStorage.setItem('contents', JSON.stringify(contents));
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   isAuthenticated = () => this.authenticated;

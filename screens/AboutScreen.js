@@ -31,12 +31,13 @@ class AboutScreen extends React.Component {
       params.firebase.signOut();
       //this.props.navigation.navigate('Login', params)
       //this.props.navigation.popToTop()
-      this.props.navigation.goBack()
+      //this.props.navigation.goBack()
       //this.props.navigation.dismiss()
+      this.props.navigation.navigate('Login', params)
     }else{
       console.log('nop: ')
-      this.props.navigation.goBack()
-      //this.props.navigation.navigate('Login', params)
+      //this.props.navigation.goBack()
+      this.props.navigation.navigate('Login')
     }
   }
 

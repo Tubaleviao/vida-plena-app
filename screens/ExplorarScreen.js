@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, FlatList } from 'react-native';
 import Row from './Row.js';
+import { AsyncStorage } from "react-native"
 
 //import Video from 'react-native-video';
 const data2 = [
@@ -35,19 +36,44 @@ const data2 = [
 class ExplorarScreen extends React.Component {
 
   componentDidMount () {
-      
+    this._retrieveData().then(data => {
+      //console.log(data)
+      let data3 = []
+      let data4 = JSON.parse(data)
+      for (var key in data4) {
+        if (data4.hasOwnProperty(key)) {
+          data3.push(data4[key])
+        }
+      }
+      //console.log(data3)
+      this.setState({dataSource: data3})
+    })
+    
+    //this.state.dataSource = this._retrieveData()
   }
 
   static navigationOptions = ({ navigation }) => {
     const {params} = navigation.state
     //console.log(navigation.state)
     return {
-      headerTitle: (params ? 'Olá '+params.firebase.user.displayName.split(' ')[0] : 'teste'),
+      headerTitle: (params ? 'Olá '+params.firebase.user.displayName.split(' ')[0] : 'testee'),
     }
   }
 
   state = {
     dataSource: data2,
+  }
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('contents');
+      if (value !== null) {
+        return value;
+      }
+    } catch (error) {
+      console.log(error)
+      return false;
+    }
   }
 
   render() {
