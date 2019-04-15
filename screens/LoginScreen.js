@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, View, StyleSheet, Text, TextInput} from 'react-native'
+import {Button, View, StyleSheet, Text, TextInput, AsyncStorage} from 'react-native'
 import SignIn from '../components/SignIn.js'
 import Firebase from '../components/FirebaseData.js'
 
@@ -7,6 +7,14 @@ class LoginScreen extends React.Component {
 
   constructor(props) {
     super(props);
+  }
+
+  _storeData = async (fire) => {
+    try {
+      await AsyncStorage.setItem('firebase', fire);
+    } catch (error) {
+      // Error saving data
+    }
   }
 
   state = {
@@ -53,7 +61,10 @@ class LoginScreen extends React.Component {
 
   componentDidUpdate(prevProps) {
     console.log(this.state.authenticated)
-    this.state.authenticated ? this.props.navigation.navigate('About', this.state) : true
+    if(this.state.authenticated){
+      this._storeData(this.state.firebase)
+      this.props.navigation.navigate('About', this.state)
+    }
   }
 
   //<Button title="Login with username and password" onPress={()=>this.props.navigation.navigate('About', this.state)} />
